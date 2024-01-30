@@ -12,7 +12,7 @@
     # Init commit linting using commitlint and Husky
     init-clint="! clint(){ \
                     git init-npm & \
-                    npm install --save-dev husky @commitlint/config-conventional @commitlint/cli \
+                    npm install --save-dev husky@8.0.3 @commitlint/config-conventional @commitlint/cli \
                     && echo 'module.exports = {extends: [\"@commitlint/config-conventional\"]}' > commitlint.config.js \
                     && npx husky install \
                     && npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}' \
