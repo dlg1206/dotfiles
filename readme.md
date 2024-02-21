@@ -13,7 +13,7 @@
 	ba=branch -a
 	
 	# delete branch
-	bd=branch -D 
+	dl=branch -D 
 	
 	# switch branch
 	sw=switch 
@@ -23,6 +23,14 @@
 	
 	# prune remote branches
 	cl=remote prune origin
+	
+	# checkout remote branches and track
+	rc="!f() { git checkout -B "$1" origin/"$1"; }; f"
+	
+	# checkout branches from current
+	feat="!f() { git checkout -B feature/"$1"; }; f"
+	bfix="!f() { git checkout -B bugfix/"$1"; }; f"
+	hfix="!f() { git checkout -B hotfix/"$1"; }; f"
 	
 	# show status
 	s=status
