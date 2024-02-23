@@ -35,6 +35,9 @@
 	# show status
 	s=status
 
+	# quick rebase
+	qrb="!f() { git switch $1; git pull --rebase; git checkout -; git rebase $1 || git rebase --abort; }; f"
+	
 	# Init npm project if one doesn't exist
 	init-npm="![ -f package.json ] || npm init -y --init-author-name='Derek Garcia' --init-version='0.0.0'"
 
