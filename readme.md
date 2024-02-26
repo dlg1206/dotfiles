@@ -37,7 +37,10 @@
 
 	# quick rebase
 	qrb="!f() { [ -z "$1" ] && { echo "Failed: Missing rebase branch. Usage: git qrb branch"; exit 1; }; git switch $1; git pull --rebase; git checkout -; git rebase $1 || git rebase --abort; }; f "
-	
+    
+    # PR prep
+    pr="!f() { [ -z "$1" ] && { echo "Failed: Missing rebase branch. Usage: git pr branch"; exit 1; }; git pull --rebase; git switch $1; git pull --rebase; git checkout -; git rebase -i $1; }; f"
+
 	# Init npm project if one doesn't exist
 	init-npm="![ -f package.json ] || npm init -y --init-author-name='Derek Garcia' --init-version='0.0.0'"
 
