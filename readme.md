@@ -36,7 +36,7 @@
 	s=status
 
 	# quick rebase
-	qrb="!f() { [ -z "$1" ] && { echo "Failed: Missing rebase branch. Usage: git qrb branch"; exit 1; }; git switch $1; git pull --rebase; git checkout -; git rebase $1 || { git rebase --abort && echo Failed to quick rebase; };    
+	qrb="!f() { [ -z "$1" ] && { echo "Failed: Missing rebase branch. Usage: git qrb branch"; exit 1; }; git switch $1; git pull --rebase; git checkout -; git rebase $1 || { git rebase --abort && echo Failed to quick rebase; }; }; f "
     
 	# PR prep
 	pr="!f() { [ -z "$1" ] && { echo "Failed: Missing rebase branch. Usage: git pr branch"; exit 1; }; git pull --rebase; git switch $1; git pull --rebase; git checkout -; git rebase -i $1; }; f"
