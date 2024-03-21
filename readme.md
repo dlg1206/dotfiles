@@ -40,7 +40,10 @@
     
 	# PR prep
 	pr="!f() { [ -z "$1" ] && { echo "Failed: Missing rebase branch. Usage: git pr branch"; exit 1; }; git pull --rebase; git switch $1; git pull --rebase; git checkout -; git rebase -i $1; }; f"
-
+    
+    # Explictly make a merge commit
+	mc="!f() { [ -z "$1" ] && { echo "Failed: Missing merge branch. Usage: git mc branch"; exit 1; }; git pull --rebase; git merge --no-ff $1 || git merge --abort; git commit --amend;}; f "
+	
 	# Init npm project if one doesn't exist
 	init-npm="![ -f package.json ] || npm init -y --init-author-name='Derek Garcia' --init-version='0.0.0'"
 
