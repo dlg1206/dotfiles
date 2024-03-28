@@ -35,6 +35,9 @@
 	# show status
 	s=status
 
+    # Reset remote: overwrite local changes with remote
+    rr = reset --hard @{u}
+    
 	# quick rebase
 	qrb="!f() { [ -z "$1" ] && { echo "Failed: Missing rebase branch. Usage: git qrb branch"; exit 1; }; git switch $1; git pull --rebase; git checkout -; git rebase $1 || { git rebase --abort && echo Failed to quick rebase; }; }; f "
     
