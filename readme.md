@@ -67,34 +67,4 @@
     # explictly make a merge commit of target branch into current branch
     # usage: git mc <branch>
 	mc="!f() { [ -z "$1" ] && { echo "Failed: Missing merge branch. Usage: git mc <branch>"; exit 1; }; git pull --rebase; git merge --no-ff $1 || git merge --abort; git commit --amend;}; f "
-	
-	# Init npm project if one doesn't exist
-	init-npm="![ -f package.json ] || npm init -y --init-author-name='Derek Garcia' --init-version='0.0.0'"
-
-	# Init commit linting using commitlint and Husky
-	init-clint="! clint(){ \
-                    git init-npm & \
-                    npm install --save-dev husky@8.0.3 @commitlint/config-conventional @commitlint/cli \
-                    && echo 'module.exports = {extends: [\"@commitlint/config-conventional\"]}' > commitlint.config.js \
-                    && npx husky install \
-                    && npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}' \
-                    && echo 'Commitlint and Husky are setup!' \
-                    || echo "Failed to setup Commitlint and Husky!"; \
-	            }; \
-	            clint \
-				"
-	# Init semantic versioning using standard-version
-	init-semver="! semver(){ \
-	                git init-npm & \
-	                npm install --save-dev standard-version \
-	                && echo "First Release: npx standard-version -f" \
-	                && echo "Major Release: npx standard-version -r major" \
-	                && echo "Minor Release: npx standard-version -r minor" \
-	                && echo "Patch: npx standard-version -r patch" \
-	                || echo "Failed to setup standard-version"; \
-	             }; \
-	             semver \
-	             "
-	# Init clint and semver
-	init-all="! git init-clint; git init-semver"
 ```
