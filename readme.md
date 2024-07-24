@@ -58,13 +58,13 @@
     
 	# quick rebase current branch onto a target branch, will reset if merge conflicts 
 	# usage: git qrb <branch>
-	qrb="!f() { [ -z "$1" ] && { echo "Failed: Missing rebase branch. Usage: git qrb <branch>"; exit 1; }; git switch $1; git pull --rebase; git checkout -; git rebase $1 || { git rebase --abort && echo Failed to quick rebase; }; }; f "
+	qrb="!f() { [ -z "$1" ] && { echo "Failed: Missing rebase branch. Usage: git qrb branch"; exit 1; }; git switch $1; git pull --rebase &> /dev/null; git checkout -; git rebase $1 || { git rebase --abort && echo Failed to quick rebase; }; }; f "
     
 	# PR prep / interactive quick rebase current branch onto target branch
 	# usage: git pr <branch>
-	pr="!f() { [ -z "$1" ] && { echo "Failed: Missing rebase branch. Usage: git pr <branch>"; exit 1; }; git pull --rebase; git switch $1; git pull --rebase; git checkout -; git rebase -i $1; }; f"
+	pr="!f() { [ -z "$1" ] && { echo "Failed: Missing rebase branch. Usage: git pr <branch>"; exit 1; }; git pull --rebase &> /dev/null; git switch $1; git pull --rebase; git checkout -; git rebase -i $1; }; f"
     
     # explictly make a merge commit of target branch into current branch
     # usage: git mc <branch>
-	mc="!f() { [ -z "$1" ] && { echo "Failed: Missing merge branch. Usage: git mc <branch>"; exit 1; }; git pull --rebase; git merge --no-ff $1 || git merge --abort; git commit --amend;}; f "
+	mc="!f() { [ -z "$1" ] && { echo "Failed: Missing merge branch. Usage: git mc <branch>"; exit 1; }; git pull --rebase &> /dev/null; git merge --no-ff $1 || git merge --abort; git commit --amend;}; f "
 ```
