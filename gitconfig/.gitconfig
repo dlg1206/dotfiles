@@ -78,6 +78,9 @@
 	             "
 	# Init clint and semver
 	init-all="! git init-clint; git init-semver"
+[init]
+    # init branch is main
+    defaultBranch = main
 [pull]
     # rebase local changes ontop of remote
 	rebase = true
