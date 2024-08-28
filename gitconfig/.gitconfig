@@ -27,12 +27,12 @@
 	cl=remote prune origin
 
 	# checkout remote branches and track
-	rc="!f() { git checkout -B "$1" origin/"$1"; }; f"
+	rc="!f() { git checkout -B \"$1\" origin/\"$1\"; }; f"
 
 	# checkout branches from current
-	feat="!f() { git checkout -B feature/"$1"; }; f"
-	bfix="!f() { git checkout -B bugfix/"$1"; }; f"
-	hfix="!f() { git checkout -B hotfix/"$1"; }; f"
+	feat="!f() { git checkout -B feature/\"$1\"; }; f"
+	bfix="!f() { git checkout -B bugfix/\"$1\"; }; f"
+	hfix="!f() { git checkout -B hotfix/\"$1\"; }; f"
 
 	# show status
 	s=status
@@ -41,10 +41,10 @@
     rr = reset --hard @{u}
 
 	# quick rebase
-	qrb="!f() { [ -z "$1" ] && { echo "Failed: Missing rebase branch. Usage: git qrb branch"; exit 1; }; git switch $1; git pull --rebase; git checkout -; git rebase $1 || { git rebase --abort && echo Failed to quick rebase; }; }; f "
+	qrb="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing rebase branch. Usage: git qrb <branch>\"; exit 1; }; git switch \"$1\"; git pull --rebase; git checkout -; git rebase \"$1\" || { git rebase --abort && echo \"Failed to quick rebase\"; }; }; f"
 
 	# Explicitly make a merge commit
-	mc="!f() { [ -z "$1" ] && { echo "Failed: Missing merge branch. Usage: git mc branch"; exit 1; }; git pull --rebase; git merge --no-ff $1 || git merge --abort; git commit --amend;}; f "
+	mc="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing merge branch. Usage: git mc <branch>\"; exit 1; }; git pull --rebase; git merge --no-ff \"$1\" || git merge --abort; git commit --amend;}; f"
 
     # Show who the user is
     whoami="!git config user.name && git config user.email"
@@ -56,7 +56,7 @@
     set-email="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git set-email <email>\"; exit 1; fi; git config user.email \"$1\"; git config user.email; }; f"
 
     # Get last n commits
-    lc="!f() { n_commits=${1:-1}; git log --oneline -n $n_commits; }; f"
+    lc="!f() { n_commits=\"${1:-1}\"; git log --oneline -n \"$n_commits\"; }; f"
 
     # Rename branch
     rn="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git rn <name>\"; exit 1; fi; git branch -m \"$1\"; git rev-parse --abbrev-ref HEAD; }; f"
@@ -65,7 +65,7 @@
     # init branch is main
     defaultBranch = main
 [pull]
-    # rebase local changes ontop of remote
+    # rebase local changes onto of remote
 	rebase = true
 [push]
     # create remote branch if den
