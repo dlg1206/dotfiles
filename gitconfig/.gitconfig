@@ -58,7 +58,8 @@
     # Set email
     set-email="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git set-name <name>\"; exit 1; fi; git config user.name \"$1\"; git config user.name; }; f"
 
-
+    # Get last n commits
+    lc="!f() { n_commits=${1:-1}; git log --oneline -n $n_commits; }; f"
 [init]
     # init branch is main
     defaultBranch = main
