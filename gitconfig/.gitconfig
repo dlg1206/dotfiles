@@ -72,6 +72,9 @@
     # pop stash n
     stp="!f() { n=\"${1:-0}\"; git stash pop stash@{\"$n\"}; }; f"
 
+    # show which branch on
+    whereami=rev-parse --abbrev-ref HEAD
+
 
 [init]
     # init branch is main
