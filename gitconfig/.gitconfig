@@ -48,6 +48,17 @@
 
 	# Explicitly make a merge commit
 	mc="!f() { [ -z "$1" ] && { echo "Failed: Missing merge branch. Usage: git mc branch"; exit 1; }; git pull --rebase; git merge --no-ff $1 || git merge --abort; git commit --amend;}; f "
+
+    # Show who the user is
+    whoami="!git config user.name && git config user.email"
+
+    # Set username
+    set-name="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git set-name <name>\"; exit 1; fi; git config user.name \"$1\"; git config user.name; }; f"
+
+    # Set email
+    set-email="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git set-name <name>\"; exit 1; fi; git config user.name \"$1\"; git config user.name; }; f"
+
+
 [init]
     # init branch is main
     defaultBranch = main
