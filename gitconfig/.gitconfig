@@ -63,6 +63,10 @@
     # Rename branch
     rn="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git rn <name>\"; exit 1; fi; git branch -m \"$1\"; git rev-parse --abbrev-ref HEAD; }; f"
 
+    # stash with optional message
+    st="!f() { if [ -z \"$1\" ]; then git stash; else git stash push -m \"$1\"; fi; git stash list; }; f"
+
+
 [init]
     # init branch is main
     defaultBranch = main
