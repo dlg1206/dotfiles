@@ -56,10 +56,14 @@
     set-name="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git set-name <name>\"; exit 1; fi; git config user.name \"$1\"; git config user.name; }; f"
 
     # Set email
-    set-email="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git set-name <name>\"; exit 1; fi; git config user.name \"$1\"; git config user.name; }; f"
+    set-email="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git set-email <email>\"; exit 1; fi; git config user.email \"$1\"; git config user.email; }; f"
 
     # Get last n commits
     lc="!f() { n_commits=${1:-1}; git log --oneline -n $n_commits; }; f"
+
+    # Rename branch
+    rn="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git rn <name>\"; exit 1; fi; git branch -m \"$1\"; git rev-parse --abbrev-ref HEAD; }; f"
+
 [init]
     # init branch is main
     defaultBranch = main
