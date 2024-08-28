@@ -66,6 +66,7 @@
     # stash with optional message
     st="!f() { if [ -z \"$1\" ]; then git stash; else git stash push -m \"$1\"; fi; git stash list; }; f"
 
+    stl=stash list
 
 [init]
     # init branch is main
