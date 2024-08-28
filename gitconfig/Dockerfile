@@ -1,4 +1,4 @@
-# Create git comman testing env
+# Create git command testing env
 FROM alpine:latest
 RUN apk add git
 RUN adduser -D git
@@ -6,8 +6,9 @@ RUN adduser -D git
 USER git
 WORKDIR /home/git
 # copy local config to test
-COPY .gitconfig .gitconfig
 RUN git init test-repo
 WORKDIR /home/git/test-repo
 
+# To build: docker build -t git .
+# To run: docker run --rm -it -v "${PWD}/.gitconfig:/home/git/.gitconfig" git
 ENTRYPOINT ["ash"]
