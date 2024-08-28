@@ -31,6 +31,8 @@
 
 	# checkout branches from current
 	feat="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git feat <branch>\"; exit 1; }; git checkout -B feature/\"$1\"; }; f"
+	test="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git test <branch>\"; exit 1; }; git checkout -B test/\"$1\"; }; f"
+    rfct="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git rfct <branch>\"; exit 1; }; git checkout -B refactor/\"$1\"; }; f"
 	bfix="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git bfix <branch>\"; exit 1; }; git checkout -B bugfix/\"$1\"; }; f"
 	hfix="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git hfix <branch>\"; exit 1; }; git checkout -B hotfix/\"$1\"; }; f"
 
