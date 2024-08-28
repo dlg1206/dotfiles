@@ -27,12 +27,12 @@
 	cl=remote prune origin
 
 	# checkout remote branches and track
-	rc="!f() { git checkout -B \"$1\" origin/\"$1\"; }; f"
+	rc="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git rc <branch>\"; exit 1; }; git checkout -B \"$1\" origin/\"$1\"; }; f"
 
 	# checkout branches from current
-	feat="!f() { git checkout -B feature/\"$1\"; }; f"
-	bfix="!f() { git checkout -B bugfix/\"$1\"; }; f"
-	hfix="!f() { git checkout -B hotfix/\"$1\"; }; f"
+	feat="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git feat <branch>\"; exit 1; }; git checkout -B feature/\"$1\"; }; f"
+	bfix="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git bfix <branch>\"; exit 1; }; git checkout -B bugfix/\"$1\"; }; f"
+	hfix="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git hfix <branch>\"; exit 1; }; git checkout -B hotfix/\"$1\"; }; f"
 
 	# show status
 	s=status
