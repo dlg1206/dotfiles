@@ -1,6 +1,6 @@
 #!/bin/bash
 # file: dev-env.sh
-# description: build local test environment for testing git alias opterations
+# description: build local test environment for testing git alias operations
 #
 # @author Derek Garcia
 ENV_NAME=git-test
