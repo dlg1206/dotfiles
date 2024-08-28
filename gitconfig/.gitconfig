@@ -66,6 +66,10 @@
     # usage: git rc <branch>
     rc="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git rc <branch>\"; exit 1; }; git checkout -B \"$1\" origin/\"$1\"; }; f"
 
+    # d: Push with force-with-lease
+    # usage: git fpush
+    fpush=push --force-with-lease
+
     # d: Overwrite local changes with remote ( reset remote )
     # usage: git rr
     rr = reset --hard @{u}
