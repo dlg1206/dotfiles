@@ -2,158 +2,158 @@
 	name = Derek Garcia
 	email = 78934662+dlg1206@users.noreply.github.com
 [alias]
-    #
-    # LOCAL BRANCH MANAGEMENT
-    #
+	#
+	# LOCAL BRANCH MANAGEMENT
+	#
 
 	# d: list all branches
 	# usage: git ba
 	ba=branch -a
 
-    # d: Show the name of the current branch
-    # usage: git whereami
-    whereami=rev-parse --abbrev-ref HEAD
+	# d: Show the name of the current branch
+	# usage: git whereami
+	whereami=rev-parse --abbrev-ref HEAD
 
-    # d: Switch branches
-    # usage: git sw <branch>
-    sw=switch
+	# d: Switch branches
+	# usage: git sw <branch>
+	sw=switch
 
-    # d: return to previous branch
-    # usage: git bk
-    bk=checkout -
+	# d: return to previous branch
+	# usage: git bk
+	bk=checkout -
 
-    # d: Rename current branch
-    # usage: git rn <name>
-    rn="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git rn <name>\"; exit 1; fi; git branch -m \"$1\"; git rev-parse --abbrev-ref HEAD; }; f"
+	# d: Rename current branch
+	# usage: git rn <name>
+	rn="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git rn <name>\"; exit 1; fi; git branch -m \"$1\"; git rev-parse --abbrev-ref HEAD; }; f"
 
-    # d: Create new feature branch
-    # usage: git feat <name>
+	# d: Create new feature branch
+	# usage: git feat <name>
 	feat="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git feat <branch>\"; exit 1; }; git checkout -B feature/\"$1\"; }; f"
 
 	# d: Create new test branch
-    # usage: git test <name>
+	# usage: git test <name>
 	test="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git test <branch>\"; exit 1; }; git checkout -B test/\"$1\"; }; f"
 
 	# d: Create new refactor branch
-    # usage: git rfct <name>
-    rfct="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git rfct <branch>\"; exit 1; }; git checkout -B refactor/\"$1\"; }; f"
+	# usage: git rfct <name>
+	rfct="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git rfct <branch>\"; exit 1; }; git checkout -B refactor/\"$1\"; }; f"
 
-    # d: Create new bugfix branch
-    # usage: git bfix <name>
+	# d: Create new bugfix branch
+	# usage: git bfix <name>
 	bfix="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git bfix <branch>\"; exit 1; }; git checkout -B bugfix/\"$1\"; }; f"
 
 	# d: Create new hotfix branch
-    # usage: git hfix <name>
+	# usage: git hfix <name>
 	hfix="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git hfix <branch>\"; exit 1; }; git checkout -B hotfix/\"$1\"; }; f"
 
-    # d: Quick rebase current branch onto another
-    # usage: git qrb <branch>
-    qrb="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing rebase branch. Usage: git qrb <branch>\"; exit 1; fi; git switch \"$1\"; git pull --rebase --autostash; git checkout -; git rebase \"$1\" || { git rebase --abort && echo \"Failed to quick rebase\"; }; }; f"
+	# d: Quick rebase current branch onto another
+	# usage: git qrb <branch>
+	qrb="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing rebase branch. Usage: git qrb <branch>\"; exit 1; fi; git switch \"$1\"; git pull --rebase --autostash; git checkout -; git rebase \"$1\" || { git rebase --abort && echo \"Failed to quick rebase\"; }; }; f"
 
-    # d: Explicitly make a merge commit from another branch into current branch
-    # usage: git mc <branch>
-    mc="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing merge branch. Usage: git mc <branch>\"; exit 1; fi; git pull --rebase; git merge --no-ff \"$1\" || { echo \"Failed to quick merge\"; git merge --abort; }; }; f"
+	# d: Explicitly make a merge commit from another branch into current branch
+	# usage: git mc <branch>
+	mc="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing merge branch. Usage: git mc <branch>\"; exit 1; fi; git pull --rebase; git merge --no-ff \"$1\" || { echo \"Failed to quick merge\"; git merge --abort; }; }; f"
 
-    # d: Delete branch
-    # usage: git dl <branch>
-    dl="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git dl <branch>\"; exit 1; }; git branch -D \"$1\"; }; f"
+	# d: Delete branch
+	# usage: git dl <branch>
+	dl="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git dl <branch>\"; exit 1; }; git branch -D \"$1\"; }; f"
 
-    #
-    # REMOTE BRANCH MANAGEMENT
-    #
+	#
+	# REMOTE BRANCH MANAGEMENT
+	#
 
-    # d: Checkout remote branches and track
-    # usage: git rc <branch>
-    rc="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git rc <branch>\"; exit 1; }; git checkout -B \"$1\" origin/\"$1\"; }; f"
+	# d: Checkout remote branches and track
+	# usage: git rc <branch>
+	rc="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git rc <branch>\"; exit 1; }; git checkout -B \"$1\" origin/\"$1\"; }; f"
 
-    # d: Push with force-with-lease
-    # usage: git fpush
-    fpush=push --force-with-lease
+	# d: Push with force-with-lease
+	# usage: git fpush
+	fpush=push --force-with-lease
 
-    # d: Overwrite local changes with remote ( reset remote )
-    # usage: git rr
-    rr = reset --hard @{u}
+	# d: Overwrite local changes with remote ( reset remote )
+	# usage: git rr
+	rr = reset --hard @{u}
 
-    # d: Prune remote branches
-    # usage: git cl
-    cl=remote prune origin
+	# d: Prune remote branches
+	# usage: git cl
+	cl=remote prune origin
 
-    # d: Delete local and remote branch
-    # usage: git dlr <branch>
-    dlr="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git dlr <branch>\"; exit 1; }; git branch -D \"$1\"; git push origin -d \"$1\"; git fetch --prune; }; f"
+	# d: Delete local and remote branch
+	# usage: git dlr <branch>
+	dlr="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git dlr <branch>\"; exit 1; }; git branch -D \"$1\"; git push origin -d \"$1\"; git fetch --prune; }; f"
 
-    #
+	#
 	# COMMITS
 	#
 
-    # d: Show git status
-    # usage: git s
-    s=status
+	# d: Show git status
+	# usage: git s
+	s=status
 
-    # d: Stage all changes and commit
-    # usage: git ac "<commit message>"
-    ac="!git add . && git commit -m"
+	# d: Stage all changes and commit
+	# usage: git ac "<commit message>"
+	ac="!git add . && git commit -m"
 
-    # d: Get last n commits ( default is 1 )
-    # usage: git lc <n?>
-    lc="!f() { n_commits=\"${1:-1}\"; git log --oneline -n \"$n_commits\"; }; f"
+	# d: Get last n commits ( default is 1 )
+	# usage: git lc <n?>
+	lc="!f() { n_commits=\"${1:-1}\"; git log --oneline -n \"$n_commits\"; }; f"
 
-    #
-    # STASH
-    #
+	#
+	# STASH
+	#
 
-    # d: Stash changes with optional message
-    # usage: git st <message?>
-    st="!f() { if [ -z \"$1\" ]; then git stash; else git stash push -m \"$1\"; fi; git stash list; }; f"
+	# d: Stash changes with optional message
+	# usage: git st <message?>
+	st="!f() { if [ -z \"$1\" ]; then git stash; else git stash push -m \"$1\"; fi; git stash list; }; f"
 
-    # d: List stashes
-    # usage: git stl
-    stl=stash list
+	# d: List stashes
+	# usage: git stl
+	stl=stash list
 
-    # d: Pop nth stash ( default is 0 )
-    # usage: git stp <n?>
-    stp="!f() { n=\"${1:-0}\"; git stash pop stash@{\"$n\"}; }; f"
+	# d: Pop nth stash ( default is 0 )
+	# usage: git stp <n?>
+	stp="!f() { n=\"${1:-0}\"; git stash pop stash@{\"$n\"}; }; f"
 
 	#
 	# CONFIGURATION
 	#
 
-    # d: Show who the user is
-    # usage: git whoami
-    whoami="!git config user.name && git config user.email"
+	# d: Show who the user is
+	# usage: git whoami
+	whoami="!git config user.name && git config user.email"
 
-    # d: Set username for current repo
-    # usage: git set-name "<name>"
-    set-name="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git set-name <name>\"; exit 1; fi; git config user.name \"$1\"; git config user.name; }; f"
+	# d: Set username for current repo
+	# usage: git set-name "<name>"
+	set-name="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git set-name <name>\"; exit 1; fi; git config user.name \"$1\"; git config user.name; }; f"
 
-    # d: Set email for current repo
-    # usage: git set-email "<email>"
-    set-email="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git set-email <email>\"; exit 1; fi; git config user.email \"$1\"; git config user.email; }; f"
+	# d: Set email for current repo
+	# usage: git set-email "<email>"
+	set-email="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing name. Usage: git set-email <email>\"; exit 1; fi; git config user.email \"$1\"; git config user.email; }; f"
 
-    #
-    # UTIL
-    #
+	#
+	# UTIL
+	#
 
 	# d: List all aliases
 	# usage: git ls
 	# TODO
 
-    # d: Show pretty git log
-    # usage: git lg
+	# d: Show pretty git log
+	# usage: git lg
 	lg="log --graph --abbrev-commit --decorate --all --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'"
 
 [init]
-    # init branch is main
-    defaultBranch = main
+	# init branch is main
+	defaultBranch = main
 [rebase]
-    # stash changes before rebasing
+	# stash changes before rebasing
 	autoStash = true
 [pull]
-    # rebase local changes onto of remote
+	# rebase local changes onto of remote
 	rebase = true
 [push]
-    # create remote branch if dne
+	# create remote branch if dne
 	autoSetupRemote = true
 [rerere]
-    # Reuse Recorded Resolution: remember conflict resolution
+	# Reuse Recorded Resolution: remember conflict resolution
 	enabled = true
