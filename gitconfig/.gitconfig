@@ -80,10 +80,14 @@
     # init branch is main
     defaultBranch = main
 [rebase]
+    # stash changes before rebasing
 	autoStash = true
 [pull]
     # rebase local changes onto of remote
 	rebase = true
 [push]
-    # create remote branch if den
+    # create remote branch if dne
 	autoSetupRemote = true
+[rerere]
+    # Reuse Recorded Resolution: remember conflict resolution
+	enabled = true
