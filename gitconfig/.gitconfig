@@ -16,7 +16,7 @@
 
 	# delete branch
 	dl="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git dl <branch>\"; exit 1; }; git branch -D \"$1\"; }; f"
-# 	dlr="!f(){ branch=\"$(git rev-parse --abbrev-ref HEAD)" }git branch -D && git push origin/"
+ 	dlr="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git dlr <branch>\"; exit 1; }; git branch -D \"$1\"; git push origin -d \"$1\"; git fetch --prune; }; f"
 
 	# switch branch
 	sw=switch
