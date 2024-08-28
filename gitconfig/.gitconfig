@@ -132,7 +132,7 @@
 
 	# d: List all aliases
 	# usage: git ls
-	ls="!git config --list | grep ^alias"
+	# TODO
 
     # d: Show pretty git log
     # usage: git lg
