@@ -104,7 +104,7 @@
 
 	# d: Stash changes with optional message
 	# usage: git st <message?>
-	st="!f() { if [ -z \"$1\" ]; then git stash; else git stash push -m \"$1\"; fi; git stash list; }; f"
+	st="!f() { if [ -z \"$1\" ]; then git stash; else git stash push -m \"$1\"; fi; }; f"
 
 	# d: List stashes
 	# usage: git stl
