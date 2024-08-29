@@ -114,6 +114,10 @@
 	# usage: git stp <n?>
 	stp="!f() { n=\"${1:-0}\"; git stash pop stash@{\"$n\"}; }; f"
 
+    # d: Drop nth stash ( default is 0 )
+    # usage: git std <n?>
+    std="!f() { n=\"${1:-0}\"; git stash drop stash@{\"$n\"}; }; f"
+
 	#
 	# CONFIGURATION
 	#
@@ -169,6 +173,7 @@
                 echo -e \"st: Stash changes with optional message\n\tusage: git st <message?>\"; \
                 echo -e \"stl: List stashes\n\tusage: git stl\"; \
                 echo -e \"stp: Pop nth stash (default is 0)\n\tusage: git stp <n?>\"; \
+                echo -e \"std: Drop nth stash (default is 0)\n\tusage: git std <n?>\"; \
                 echo -e \"\nCONFIGURATION\"; \
                 echo -e \"whoami: Show who the user is\n\tusage: git whoami\"; \
                 echo -e \"set-name: Set username for current repo\n\tusage: git set-name '<name>'\"; \
