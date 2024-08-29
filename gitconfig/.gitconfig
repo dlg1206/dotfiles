@@ -134,13 +134,50 @@
 	# UTIL
 	#
 
-	# d: List all aliases
-	# usage: git ls
-	# TODO
-
 	# d: Show pretty git log
 	# usage: git lg
 	lg="log --graph --abbrev-commit --decorate --all --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'"
+
+    # d: List all aliases
+    # usage: git ls
+    ls="!f() { \
+                echo -e \"\nLOCAL BRANCH MANAGEMENT\"; \
+                echo -e \"ba: List all branches\n\tusage: git ba\"; \
+                echo -e \"whereami: Show the name of the current branch\n\tusage: git whereami\"; \
+                echo -e \"sw: Switch branches\n\tusage: git sw <branch>\"; \
+                echo -e \"bk: Return to previous branch\n\tusage: git bk\"; \
+                echo -e \"rn: Rename current branch\n\tusage: git rn <name>\"; \
+                echo -e \"feat: Create new feature branch\n\tusage: git feat <name>\"; \
+                echo -e \"test: Create new test branch\n\tusage: git test <name>\"; \
+                echo -e \"rfct: Create new refactor branch\n\tusage: git rfct <name>\"; \
+                echo -e \"bfix: Create new bugfix branch\n\tusage: git bfix <name>\"; \
+                echo -e \"hfix: Create new hotfix branch\n\tusage: git hfix <name>\"; \
+                echo -e \"qrb: Quick rebase current branch onto another\n\tusage: git qrb <branch>\"; \
+                echo -e \"mc: Explicitly make a merge commit from another branch into current branch\n\tusage: git mc <branch>\"; \
+                echo -e \"dl: Delete branch\n\tusage: git dl <branch>\"; \
+                echo -e \"\nREMOTE BRANCH MANAGEMENT\"; \
+                echo -e \"rc: Checkout remote branches and track\n\tusage: git rc <branch>\"; \
+                echo -e \"fpush: Push with force-with-lease\n\tusage: git fpush\"; \
+                echo -e \"rr: Overwrite local changes with remote (reset remote)\n\tusage: git rr\"; \
+                echo -e \"cl: Prune remote branches\n\tusage: git cl\"; \
+                echo -e \"dlr: Delete local and remote branch\n\tusage: git dlr <branch>\"; \
+                echo -e \"\nCOMMITS\"; \
+                echo -e \"s: Show git status\n\tusage: git s\"; \
+                echo -e \"ac: Stage all changes and commit\n\tusage: git ac '<commit message>'\"; \
+                echo -e \"lc: Get last n commits (default is 1)\n\tusage: git lc <n?>\"; \
+                echo -e \"\nSTASH\"; \
+                echo -e \"st: Stash changes with optional message\n\tusage: git st <message?>\"; \
+                echo -e \"stl: List stashes\n\tusage: git stl\"; \
+                echo -e \"stp: Pop nth stash (default is 0)\n\tusage: git stp <n?>\"; \
+                echo -e \"\nCONFIGURATION\"; \
+                echo -e \"whoami: Show who the user is\n\tusage: git whoami\"; \
+                echo -e \"set-name: Set username for current repo\n\tusage: git set-name '<name>'\"; \
+                echo -e \"set-email: Set email for current repo\n\tusage: git set-email '<email>'\"; \
+                echo -e \"\nUTIL\"; \
+                echo -e \"lg: Show pretty git log\n\tusage: git lg\"; \
+                echo -e \"ls: List all aliases\n\tusage: git ls\"; \
+            }; f"
+
 
 [init]
 	# init branch is main

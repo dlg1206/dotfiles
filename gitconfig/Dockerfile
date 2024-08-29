@@ -1,6 +1,6 @@
 # Create git command testing env
 FROM alpine:latest
-RUN apk add git
+RUN apk add --no-cache git
 RUN adduser -D git
 # setup testing repo
 USER git
