@@ -62,6 +62,23 @@
 	# REMOTE BRANCH MANAGEMENT
 	#
 
+	# d: Clone repo with config, folder is optional
+	# usage: git clone-as <url> <folder?>
+	clone-as="!f() { \
+        read -rp \"Name (default: $(git config --global user.name)): \" name; \
+        read -rp \"Email (default: $(git config --global user.email)): \" email; \
+        if [ -z \"$2\" ]; then \
+            git clone \"$1\"; \
+        else \
+            git clone \"$1\" \"$2\"; \
+        fi || exit 1; \
+        cd \"$(basename \"${1%.git}\" .git)\" || exit 1; \
+        if [ -n \"$name\" ]; then git config user.name \"$name\"; fi; \
+        if [ -n \"$email\" ]; then git config user.email \"$email\"; fi; \
+        echo \"Name: $(git config user.name)\" && echo \"Email: $(git config user.email)\"; \
+        cd .. && exit 0; \
+    }; f"
+
 	# d: Checkout remote branches and track
 	# usage: git rc <branch>
 	rc="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git rc <branch>\"; exit 1; }; git checkout -B \"$1\" origin/\"$1\"; }; f"
@@ -160,6 +177,7 @@
                 echo -e \"mc: Explicitly make a merge commit from another branch into current branch\n\tusage: git mc <branch>\"; \
                 echo -e \"dl: Delete branch\n\tusage: git dl <branch>\"; \
                 echo -e \"\nREMOTE BRANCH MANAGEMENT\"; \
+                echo -e \"clone-as: Clone repo with config, folder is optional\n\tusage: git clone-as <url> <folder?>\"; \
                 echo -e \"rc: Checkout remote branches and track\n\tusage: git rc <branch>\"; \
                 echo -e \"fpush: Push with force-with-lease\n\tusage: git fpush\"; \
                 echo -e \"rr: Overwrite local changes with remote (reset remote)\n\tusage: git rr\"; \
