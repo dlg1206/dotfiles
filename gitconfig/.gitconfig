@@ -69,10 +69,11 @@
         read -rp \"Email (default: $(git config --global user.email)): \" email; \
         if [ -z \"$2\" ]; then \
             git clone \"$1\"; \
+			cd \"$(basename \"${1%.git}\" .git)\" || exit 1; \
         else \
             git clone \"$1\" \"$2\"; \
+			cd \"$2\" || exit 1; \
         fi || exit 1; \
-        cd \"$(basename \"${1%.git}\" .git)\" || exit 1; \
         if [ -n \"$name\" ]; then git config user.name \"$name\"; fi; \
         if [ -n \"$email\" ]; then git config user.email \"$email\"; fi; \
         echo \"Name: $(git config user.name)\" && echo \"Email: $(git config user.email)\"; \
