@@ -78,29 +78,9 @@
         if [ -n \"$email\" ]; then git config user.email \"$email\"; fi; \
         echo \"Name: $(git config user.name)\" && echo \"Email: $(git config user.email)\"; \
         cd .. && exit 0; \
-    }; f"
+    	}; f"
 
-	# d: Checkout remote branches and track
-	# usage: git rc <branch>
-	rc="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git rc <branch>\"; exit 1; }; git checkout -B \"$1\" origin/\"$1\"; }; f"
-
-	# d: Push with force-with-lease
-	# usage: git fpush
-	fpush=push --force-with-lease
-
-	# d: Overwrite local changes with remote ( reset remote )
-	# usage: git rr
-	rr=reset --hard @{u}
-
-	# d: Prune remote branches
-	# usage: git cl
-	cl=remote prune origin
-
-	# d: Delete local and remote branch
-	# usage: git dlr <branch>
-	dlr="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git dlr <branch>\"; exit 1; }; git branch -D \"$1\"; git push origin -d \"$1\"; git fetch --prune; }; f"
-
-	# sc: sparse checkout repo
+    # sc: sparse checkout repo
 	# usage: git sc <url> <folder?>
 	sc="!f() { \
 	    read -rp \"Name (default: $(git config --global user.name)): \" name; \
@@ -121,6 +101,27 @@
 	    cd ..; \
 	    exit 0; \
 	}; f"
+
+	# d: Checkout remote branches and track
+	# usage: git rc <branch>
+	rc="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git rc <branch>\"; exit 1; }; git checkout -B \"$1\" origin/\"$1\"; }; f"
+
+	# d: Push with force-with-lease
+	# usage: git fpush
+	fpush=push --force-with-lease
+
+	# d: Overwrite local changes with remote ( reset remote )
+	# usage: git rr
+	rr = reset --hard @{u}
+
+	# d: Prune remote branches
+	# usage: git cl
+	cl=remote prune origin
+
+	# d: Delete local and remote branch
+	# usage: git dlr <branch>
+	dlr="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git dlr <branch>\"; exit 1; }; git branch -D \"$1\"; git push origin -d \"$1\"; git fetch --prune; }; f"
+
 
 	#
 	# COMMITS
@@ -154,9 +155,16 @@
 	# usage: git stp <n?>
 	stp="!f() { n=\"${1:-0}\"; git stash pop stash@{\"$n\"}; }; f"
 
-    # d: Drop nth stash ( default is 0 )
-    # usage: git std <n?>
-    std="!f() { n=\"${1:-0}\"; git stash drop stash@{\"$n\"}; }; f"
+	# d: Drop nth stash ( default is 0 )
+	# usage: git std <n?>
+	std="!f() { n=\"${1:-0}\"; git stash drop stash@{\"$n\"}; }; f"
+
+	#
+	# CHERRY-PICK
+	#
+	# cp: Alias for cherry pick
+	# usage: git cp
+	cp=cherry-pick
 
 	#
 	# CONFIGURATION
@@ -182,49 +190,51 @@
 	# usage: git lg
 	lg="log --graph --abbrev-commit --decorate --all --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'"
 
-    # d: List all aliases
+	# d: List all aliases
     # usage: git ls
-    	ls="!f() { \
-                printf \"\nLOCAL BRANCH MANAGEMENT\n\"; \
-                printf \"ba: List all branches\n\tusage: git ba\n\"; \
-                printf \"whereami: Show the name of the current branch\n\tusage: git whereami\n\"; \
-                printf \"sw: Switch branches\n\tusage: git sw <branch>\n\"; \
-                printf \"bk: Return to previous branch\n\tusage: git bk\n\"; \
-                printf \"rn: Rename current branch\n\tusage: git rn <name>\n\"; \
-                printf \"feat: Create new feature branch\n\tusage: git feat <name>\n\"; \
-                printf \"test: Create new test branch\n\tusage: git test <name>\n\"; \
-                printf \"rfct: Create new refactor branch\n\tusage: git rfct <name>\n\"; \
-                printf \"bfix: Create new bugfix branch\n\tusage: git bfix <name>\n\"; \
-                printf \"hfix: Create new hotfix branch\n\tusage: git hfix <name>\n\"; \
-                printf \"qrb: Quick rebase current branch onto another\n\tusage: git qrb <branch>\n\"; \
-                printf \"mc: Explicitly make a merge commit from another branch into current branch\n\tusage: git mc <branch>\n\"; \
-                printf \"dl: Delete branch\n\tusage: git dl <branch>\n\"; \
-                printf \"\nREMOTE BRANCH MANAGEMENT\n\"; \
-                printf \"clone-as: Clone repo with config, folder is optional\n\tusage: git clone-as <url> <folder?>\n\"; \
-                printf \"sc: Sparse checkout repo, folder is optional\n\tusage: git clone-as <url> <folder?>\n\"; \
-                printf \"rc: Checkout remote branches and track\n\tusage: git rc <branch>\n\"; \
-                printf \"fpush: Push with force-with-lease\n\tusage: git fpush\n\"; \
-                printf \"rr: Overwrite local changes with remote (reset remote)\n\tusage: git rr\n\"; \
-                printf \"cl: Prune remote branches\n\tusage: git cl\"; \
-                printf \"dlr: Delete local and remote branch\n\tusage: git dlr <branch>\n\"; \
-                printf \"\nCOMMITS\n\"; \
-                printf \"s: Show git status\n\tusage: git s\n\"; \
-                printf \"ac: Stage all changes and commit\n\tusage: git ac '<commit message>'\n\"; \
-                printf \"lc: Get last n commits (default is 1)\n\tusage: git lc <n?>\n\"; \
-                printf \"\nSTASH\n\"; \
-                printf \"st: Stash changes with optional message\n\tusage: git st <message?>\n\"; \
-                printf \"stl: List stashes\n\tusage: git stl\n\"; \
-                printf \"stp: Pop nth stash (default is 0)\n\tusage: git stp <n?>\n\"; \
-                printf \"std: Drop nth stash (default is 0)\n\tusage: git std <n?>\n\"; \
-                printf \"\nCONFIGURATION\n\"; \
-                printf \"whoami: Show who the user is\n\tusage: git whoami\n\"; \
-                printf \"set-name: Set username for current repo\n\tusage: git set-name '<name>'\n\"; \
-                printf \"set-email: Set email for current repo\n\tusage: git set-email '<email>'\n\"; \
-                printf \"\nUTIL\n\"; \
-                printf \"lg: Show pretty git log\n\tusage: git lg\n\"; \
-                printf \"ls: List all aliases\n\tusage: git ls\n\"; \
-                printf \"\n\"; \
-            }; f"
+    ls="!f() { \
+            printf \"\nLOCAL BRANCH MANAGEMENT\n\"; \
+            printf \"ba: List all branches\n\tusage: git ba\n\"; \
+            printf \"whereami: Show the name of the current branch\n\tusage: git whereami\n\"; \
+            printf \"sw: Switch branches\n\tusage: git sw <branch>\n\"; \
+            printf \"bk: Return to previous branch\n\tusage: git bk\n\"; \
+            printf \"rn: Rename current branch\n\tusage: git rn <name>\n\"; \
+            printf \"feat: Create new feature branch\n\tusage: git feat <name>\n\"; \
+            printf \"test: Create new test branch\n\tusage: git test <name>\n\"; \
+            printf \"rfct: Create new refactor branch\n\tusage: git rfct <name>\n\"; \
+            printf \"bfix: Create new bugfix branch\n\tusage: git bfix <name>\n\"; \
+            printf \"hfix: Create new hotfix branch\n\tusage: git hfix <name>\n\"; \
+            printf \"qrb: Quick rebase current branch onto another\n\tusage: git qrb <branch>\n\"; \
+            printf \"mc: Explicitly make a merge commit from another branch into current branch\n\tusage: git mc <branch>\n\"; \
+            printf \"dl: Delete branch\n\tusage: git dl <branch>\n\"; \
+            printf \"\nREMOTE BRANCH MANAGEMENT\n\"; \
+            printf \"clone-as: Clone repo with config, folder is optional\n\tusage: git clone-as <url> <folder?>\n\"; \
+            printf \"sc: Sparse checkout repo, folder is optional\n\tusage: git clone-as <url> <folder?>\n\"; \
+            printf \"rc: Checkout remote branches and track\n\tusage: git rc <branch>\n\"; \
+            printf \"fpush: Push with force-with-lease\n\tusage: git fpush\n\"; \
+            printf \"rr: Overwrite local changes with remote (reset remote)\n\tusage: git rr\n\"; \
+            printf \"cl: Prune remote branches\n\tusage: git cl\"; \
+            printf \"dlr: Delete local and remote branch\n\tusage: git dlr <branch>\n\"; \
+            printf \"\nCOMMITS\n\"; \
+            printf \"s: Show git status\n\tusage: git s\n\"; \
+            printf \"ac: Stage all changes and commit\n\tusage: git ac '<commit message>'\n\"; \
+            printf \"lc: Get last n commits (default is 1)\n\tusage: git lc <n?>\n\"; \
+            printf \"\nSTASH\n\"; \
+            printf \"st: Stash changes with optional message\n\tusage: git st <message?>\n\"; \
+            printf \"stl: List stashes\n\tusage: git stl\n\"; \
+            printf \"stp: Pop nth stash (default is 0)\n\tusage: git stp <n?>\n\"; \
+            printf \"std: Drop nth stash (default is 0)\n\tusage: git std <n?>\n\"; \
+            printf \"\nCHERRY PICK\n\"; \
+            printf \"cp: Alias for git cherry-pick\n\tusage: git cp\n\"; \
+            printf \"\nCONFIGURATION\n\"; \
+            printf \"whoami: Show who the user is\n\tusage: git whoami\n\"; \
+            printf \"set-name: Set username for current repo\n\tusage: git set-name '<name>'\n\"; \
+            printf \"set-email: Set email for current repo\n\tusage: git set-email '<email>'\n\"; \
+            printf \"\nUTIL\n\"; \
+            printf \"lg: Show pretty git log\n\tusage: git lg\n\"; \
+            printf \"ls: List all aliases\n\tusage: git ls\n\"; \
+            printf \"\n\"; \
+        }; f"
 
 
 [init]
