@@ -143,6 +143,10 @@
 	# usage: git amend
 	amend=commit --amend
 
+    # fixup: Amend commit without changing commit message
+    # usage: git fixup
+    fixup=commit --amend --no-edit
+
 	#
 	# STASH
 	#
@@ -224,6 +228,7 @@
             printf \"ac: Stage all changes and commit\n\tusage: git ac '<commit message>'\n\"; \
             printf \"lc: Get last n commits (default is 1)\n\tusage: git lc <n?>\n\"; \
             printf \"amend: Amend commit\n\tusage: git amend\n\"; \
+            printf \"fixup: Amend commit without changing the commit message\n\tusage: git fixup\n\"; \
             printf \"\nSTASH\n\"; \
             printf \"st: Stash changes with optional message\n\tusage: git st <message?>\n\"; \
             printf \"stl: List stashes\n\tusage: git stl\n\"; \
