@@ -80,7 +80,7 @@
         cd .. && exit 0; \
     	}; f"
 
-    # sc: sparse checkout repo
+    	# sc: sparse checkout repo
 	# usage: git sc <url> <folder?>
 	sc="!f() { \
 	    read -rp \"Name (default: $(git config --global user.name)): \" name; \
@@ -138,6 +138,10 @@
 	# d: Get last n commits ( default is 1 )
 	# usage: git lc <n?>
 	lc="!f() { n_commits=\"${1:-1}\"; git log --oneline -n \"$n_commits\"; }; f"
+
+	# amend: Amend commit
+	# usage: git amend
+	amend=commit --amend
 
 	#
 	# STASH
@@ -219,6 +223,7 @@
             printf \"s: Show git status\n\tusage: git s\n\"; \
             printf \"ac: Stage all changes and commit\n\tusage: git ac '<commit message>'\n\"; \
             printf \"lc: Get last n commits (default is 1)\n\tusage: git lc <n?>\n\"; \
+            printf \"amend: Amend commit\n\tusage: git amend\n\"; \
             printf \"\nSTASH\n\"; \
             printf \"st: Stash changes with optional message\n\tusage: git st <message?>\n\"; \
             printf \"stl: List stashes\n\tusage: git stl\n\"; \
