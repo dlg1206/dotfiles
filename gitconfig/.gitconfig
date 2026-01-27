@@ -43,6 +43,10 @@
 	# usage: git hfix <name>
 	hfix="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git hfix <branch>\"; exit 1; }; git checkout -B hotfix/\"$1\"; }; f"
 
+    # d: Rebase current branch onto another - just rebase onto base branch, no pull from remote
+    # usage: git rb <branch>
+    rb="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing rebase branch. Usage: git rb <branch>\"; exit 1; fi; git rebase \"$1\" }; f"
+
 	# d: Quick rebase current branch onto another
 	# usage: git qrb <branch>
 	qrb="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing rebase branch. Usage: git qrb <branch>\"; exit 1; fi; git switch \"$1\"; git pull --rebase --autostash; git checkout -; git rebase \"$1\" || { git rebase --abort && echo \"Failed to quick rebase\"; }; }; f"
