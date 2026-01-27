@@ -51,6 +51,10 @@
 	# usage: git qrb <branch>
 	qrb="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing rebase branch. Usage: git qrb <branch>\"; exit 1; fi; git switch \"$1\"; git pull --rebase --autostash; git checkout -; git rebase \"$1\" || { git rebase --abort && echo \"Failed to quick rebase\"; }; }; f"
 
+    # d: Continue rebase
+    # usage: git rbc
+    rbc=rebase --continue
+
 	# d: Explicitly make a merge commit from another branch into current branch
 	# usage: git mc <branch>
 	mc="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing merge branch. Usage: git mc <branch>\"; exit 1; fi; git pull --rebase; git merge --no-ff \"$1\" || { echo \"Failed to quick merge\"; git merge --abort; }; }; f"
