@@ -43,17 +43,25 @@
 	# usage: git hfix <name>
 	hfix="!f() { [ -z \"$1\" ] && { echo \"Failed: Missing branch name. Usage: git hfix <branch>\"; exit 1; }; git checkout -B hotfix/\"$1\"; }; f"
 
-    # d: Rebase current branch onto another - just rebase onto base branch, no pull from remote
-    # usage: git rb <branch>
-    rb="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing rebase branch. Usage: git rb <branch>\"; exit 1; fi; git rebase \"$1\" }; f"
-
 	# d: Quick rebase current branch onto another
 	# usage: git qrb <branch>
 	qrb="!f() { if [ -z \"$1\" ]; then echo \"Failed: Missing rebase branch. Usage: git qrb <branch>\"; exit 1; fi; git switch \"$1\"; git pull --rebase --autostash; git checkout -; git rebase \"$1\" || { git rebase --abort && echo \"Failed to quick rebase\"; }; }; f"
 
+    # d: Rebase
+    # usage: git rb <branch>
+    rb=rebase
+
+    # d: Interactive rebase
+    # usage: git rbi <branch>
+    rbi=rebase -i
+
     # d: Continue rebase
     # usage: git rbc
     rbc=rebase --continue
+
+    # d: Abort rebase
+    # usage: git rba
+    rba=rebase --abort
 
 	# d: Explicitly make a merge commit from another branch into current branch
 	# usage: git mc <branch>
@@ -218,6 +226,10 @@
             printf \"bfix: Create new bugfix branch\n\tusage: git bfix <name>\n\"; \
             printf \"hfix: Create new hotfix branch\n\tusage: git hfix <name>\n\"; \
             printf \"qrb: Quick rebase current branch onto another\n\tusage: git qrb <branch>\n\"; \
+            printf \"rb: Rebase current branch onto another\n\tusage: git rb <branch>\n\"; \
+            printf \"rbi: Interactive rebase\n\tusage: git rbi <ref>\n\"; \
+            printf \"rbc: Continue rebase\n\tusage: git rbc\n\"; \
+            printf \"rba: Abort rebase\n\tusage: git rba\n\"; \
             printf \"mc: Explicitly make a merge commit from another branch into current branch\n\tusage: git mc <branch>\n\"; \
             printf \"dl: Delete branch\n\tusage: git dl <branch>\n\"; \
             printf \"\nREMOTE BRANCH MANAGEMENT\n\"; \
